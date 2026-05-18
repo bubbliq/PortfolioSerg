@@ -38,7 +38,7 @@ export type Project = {
   outcome?: string;
 };
 
-const img = (slug: string, n: number) => `/projects/${slug}/${n}.png`;
+const img = (slug: string, n: number) => `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/projects/${slug}/${n}.png`;
 
 export const projects: Project[] = [
   {
