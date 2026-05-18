@@ -1,0 +1,8 @@
+node_modules
+.next
+out
+_unpacked
+*.log
+.env*.local
+.DS_Store
+.vscode
