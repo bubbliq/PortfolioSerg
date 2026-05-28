@@ -14,7 +14,7 @@ export function Hero() {
               <span className="rise inline-block">Привет,</span>
             </span>
             <span className="block overflow-hidden">
-              <span className="rise rise-delay-1 inline-block">Я - Сергей, —</span>
+              <span className="rise rise-delay-1 inline-block">Я - Сергей,</span>
             </span>
             <span className="block overflow-hidden text-chalk-300">
               <span className="rise rise-delay-2 inline-block">проектирую</span>
