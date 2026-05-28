@@ -1,6 +1,6 @@
 export const site = {
   name: 'Сергей Рудаков',
-  role: 'Senior Product Designer',
+  role: 'Product Designer',
   shortBio:
     'Проектирую мобильные и веб-интерфейсы. Веду полный цикл — от исследования до внедрения, опираясь на данные и интересы пользователей.',
   location: 'Санкт-Петербург',

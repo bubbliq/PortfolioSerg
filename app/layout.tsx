@@ -22,11 +22,11 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Сергей Рудаков — Senior Product Designer',
+  title: 'Сергей Рудаков — Product Designer',
   description:
     'Портфолио продуктового дизайнера Сергея Рудакова: мобильные и веб-приложения, исследование, проектирование, дизайн-системы.',
   openGraph: {
-    title: 'Сергей Рудаков — Senior Product Designer',
+    title: 'Сергей Рудаков — Product Designer',
     description:
       'Портфолио продуктового дизайнера: HealthFit, ProVino, View, Славянка, Place Bureau.',
     type: 'website',
