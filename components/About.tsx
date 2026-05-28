@@ -31,7 +31,7 @@ export function About() {
 
         <div className="md:col-span-7 space-y-10">
           <p className="text-lg md:text-xl leading-snug text-chalk-100 max-w-prose">
-            Senior Product Designer с опытом в B2C и B2B. Работаю в продукте полным циклом:
+            Product Designer с опытом в B2C и B2B. Работаю в продукте полным циклом:
             исследование → гипотезы → концепции → тестирование → внедрение. Защищаю
             UX-решения данными и пользовательскими инсайтами.
           </p>
