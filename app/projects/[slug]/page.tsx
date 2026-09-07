@@ -76,6 +76,38 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </div>
       )}
 
+      {/* Outcome — surfaced right after the cover, before the deep-dive sections */}
+      {project.outcome && (
+        <section className="px-6 md:px-10 pt-16 md:pt-24">
+          <div className="mx-auto max-w-page">
+            <div className="rounded-2xl border hairline p-8 md:p-12 bg-ink-800/50">
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-chalk-300 mb-4">
+                Результат
+              </p>
+              {Array.isArray(project.outcome) ? (
+                <ul className="space-y-3 max-w-prose">
+                  {project.outcome.map((line, i) => (
+                    <li
+                      key={i}
+                      className="flex gap-4 font-display text-xl md:text-2xl leading-snug"
+                    >
+                      <span aria-hidden className="text-chalk-300">
+                        —
+                      </span>
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="font-display text-2xl md:text-3xl leading-snug max-w-prose">
+                  {project.outcome}
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Sections */}
       <article className="px-6 md:px-10 py-20 md:py-32">
         <div className="mx-auto max-w-page space-y-20 md:space-y-32">
@@ -84,22 +116,6 @@ export default async function ProjectPage({ params }: { params: Params }) {
           ))}
         </div>
       </article>
-
-      {/* Outcome */}
-      {project.outcome && (
-        <section className="px-6 md:px-10 pb-24 md:pb-32">
-          <div className="mx-auto max-w-page">
-            <div className="rounded-2xl border hairline p-8 md:p-12 bg-ink-800/50">
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-chalk-300 mb-4">
-                Результат
-              </p>
-              <p className="font-display text-2xl md:text-3xl leading-snug max-w-prose">
-                {project.outcome}
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* CTAs duplicated on project pages too — both Telegram and CV */}
       <section className="px-6 md:px-10 pb-24 md:pb-32">
