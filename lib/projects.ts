@@ -3,6 +3,7 @@ export type ProjectSection =
   | { kind: 'list'; title?: string; items: string[] }
   | { kind: 'quote'; text: string; author?: string }
   | { kind: 'hypotheses'; title?: string; items: { hypothesis: string; result: string; insight: string }[] }
+  | { kind: 'tools'; title?: string; items: { name: string; logo: string; description: string }[] }
   | {
       kind: 'gallery';
       images?: { src: string; alt?: string; aspect?: 'wide' | 'tall' | 'square' }[];
@@ -127,6 +128,23 @@ export const projects: Project[] = [
           'Единый профиль: агрегация Apple Health, Mi Fitness, медицинских чекапов, геймификация и ачивки',
           'Социальный слой: групповые чаты для челленджей и корпоративная лента активности',
           'Маркетплейс льгот: внутренняя валюта (коины) за активности, скидки и сертификаты партнёров',
+        ],
+      },
+      {
+        kind: 'tools',
+        title: 'Инструменты',
+        items: [
+          {
+            name: 'ChatGPT',
+            logo: '/logos/chatgpt.png',
+            description:
+              'Генерация иллюстраций. Обработка транскрипций интервью респондентов. Создание брендинга B2C приложения',
+          },
+          {
+            name: 'Claude',
+            logo: '/logos/claude.png',
+            description: 'Создание прототипов экранов. Сборка анимации в интерфейсе',
+          },
         ],
       },
       {

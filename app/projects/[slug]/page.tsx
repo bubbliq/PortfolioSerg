@@ -235,6 +235,35 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
     );
   }
 
+  if (section.kind === 'tools') {
+    return (
+      <div className="grid md:grid-cols-12 gap-8">
+        <div className="md:col-span-4">
+          {section.title && <SectionLabel index={index}>{section.title}</SectionLabel>}
+        </div>
+        <div className="md:col-span-8">
+          <div className="grid sm:grid-cols-2 gap-6">
+            {section.items.map((tool, i) => (
+              <div key={i} className="rounded-2xl border hairline p-7 bg-ink-800/40">
+                <div className="w-12 h-12 rounded-xl bg-ink-700 border hairline flex items-center justify-center mb-5">
+                  <img
+                    src={withBase(tool.logo)}
+                    alt={tool.name}
+                    className="w-7 h-7 object-contain"
+                  />
+                </div>
+                <p className="font-mono text-[11px] uppercase tracking-wider text-chalk-300 mb-2">
+                  {tool.name}
+                </p>
+                <p className="text-base leading-snug text-chalk-100">{tool.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (section.kind === 'hypotheses') {
     return (
       <div className="grid md:grid-cols-12 gap-8">

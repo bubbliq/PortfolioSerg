@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HealthFit — превью блока «Инструменты»</title>
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --ink-800:#111111;
+    --ink-700:#1a1a1a;
+    --chalk-50:#f7f7f5;
+    --chalk-100:#ededec;
+    --chalk-300:#a8a8a4;
+    --hairline: rgba(247,247,245,0.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;
+    background:var(--bg);
+    color:var(--chalk-50);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:64px 32px 120px;
+  }
+  .tag{
+    font-family:"JetBrains Mono","SFMono-Regular",Consolas,monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--chalk-300);
+    margin:0 0 40px;
+  }
+  .note{
+    border:1px solid var(--hairline);
+    border-radius:14px;
+    padding:18px 22px;
+    margin-bottom:56px;
+    font-size:14px;
+    line-height:1.6;
+    color:var(--chalk-300);
+    background:rgba(247,247,245,0.03);
+  }
+  .note b{ color:var(--chalk-50); font-weight:600; }
+  .section{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:32px;
+    padding:56px 0;
+  }
+  .section + .section{ border-top:1px solid var(--hairline); }
+  .label{ grid-column:span 4; }
+  .label .idx{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--chalk-300);
+    margin:0 0 12px;
+  }
+  .label h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:500;
+    font-size:28px;
+    line-height:1.2;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .content{ grid-column:span 8; }
+
+  /* existing "Что сделали" list, for context only */
+  ul.list{ list-style:none; margin:0; padding:0; }
+  ul.list li{
+    display:flex;
+    gap:16px;
+    font-size:18px;
+    line-height:1.4;
+    color:var(--chalk-100);
+    border-bottom:1px solid var(--hairline);
+    padding:0 0 16px;
+    margin:0 0 16px;
+  }
+  ul.list li:last-child{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
+  ul.list li .n{
+    font-family:"JetBrains Mono",monospace;
+    font-size:12px;
+    color:var(--chalk-300);
+    padding-top:4px;
+    flex-shrink:0;
+  }
+
+  /* NEW tools block */
+  .tools-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  @media (max-width:640px){ .tools-grid{ grid-template-columns:1fr; } }
+  .tool-card{
+    border:1px solid var(--hairline);
+    border-radius:16px;
+    padding:28px;
+    background:rgba(247,247,245,0.025);
+  }
+  .tool-logo{
+    width:52px;
+    height:52px;
+    border-radius:14px;
+    background:var(--ink-700);
+    border:1px solid var(--hairline);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:20px;
+  }
+  .tool-logo svg{ width:28px; height:28px; display:block; }
+  .tool-name{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--chalk-300);
+    margin:0 0 10px;
+  }
+  .tool-desc{
+    font-size:16px;
+    line-height:1.5;
+    color:var(--chalk-100);
+    margin:0;
+  }
+
+  /* placeholder for gallery that follows */
+  .gallery-ph{
+    grid-column:1/-1;
+    border:1px dashed var(--hairline);
+    border-radius:16px;
+    padding:40px;
+    text-align:center;
+    font-family:"JetBrains Mono",monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--chalk-300);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="tag">Превью — блок ещё не добавлен на сайт</p>
+
+    <div class="note">
+      Это макет того, как новый блок <b>«Инструменты»</b> будет выглядеть на странице кейса HealthFit — между блоком «Что сделали» и галереей скриншотов. Стиль подобран под текущую вёрстку сайта (тот же grid, отступы, шрифты, hairline-рамки). Логотипы — оригинальные, как ты прислал.
+    </div>
+
+    <!-- existing section, shown only for context -->
+    <div class="section">
+      <div class="label">
+        <p class="idx">— 05</p>
+        <h2>Что сделали</h2>
+      </div>
+      <div class="content">
+        <ul class="list">
+          <li><span class="n">01</span><span>Персонализация и «Навигатор баланса»: интерактивный онбординг-тест, ИИ-помощник Вита формирует персональный индекс благополучия</span></li>
+          <li><span class="n">02</span><span>Редизайн «Моих активностей»: разделение направлений, индикаторы прогресса, виджеты быстрого доступа</span></li>
+          <li><span class="n">…</span><span style="color:var(--chalk-300)">(остальные пункты списка — без изменений)</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- NEW section -->
+    <div class="section" style="outline:1px solid rgba(247,247,245,0.25); outline-offset:16px; border-radius:8px;">
+      <div class="label">
+        <p class="idx">— 06 <span style="color:var(--chalk-50)">(новый блок)</span></p>
+        <h2>Инструменты</h2>
+      </div>
+      <div class="content">
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-logo">
+              <!-- ChatGPT / OpenAI logo -->
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAACxLAAAsSwGlPZapAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAADExJREFUeAHtXV1uG0cSru4hDSPeRZgThD6BpROEOsFKQGLFTyZhOcA+mV7J2UdRjxtLEfVkwFaWzJPWcgApJ7B8AtEnEHOC1QJ2drHkTKeqyVGoUfdMd8+PqGA+wJDFoZozVd1f/XUXAUqUKFGiRIkSJUqUKFGiRKFgMKdYf/OqwYB/wYRYwF8XAoAa3myNrgmAc/z/kP7hrycAwbvn978ZwA3EXCmg3evVKn8Knggh2qGwTYFKGXocOmw0evePB38dwg3BXChgKvhNQMFDSpAiGGP97a8ebcENwLUr4NvX+8s+g57tjE8CKaLij5bmfTVwuEZsvPlhM2BwlLXwCThm3feqZ/QZMMe4thXw7HC/h7O0CUWAsc68UtK1KABn5a4R3ws4EQyOOXo5o4/VYbfVOqeXyWZ4t8cL4LF7TMAyPkUjcSxUwvgD36veGdXxN/Ss+KeBEJ/RJc7EMGBs6H+oDMLPKAqFK0BSghCduPfgyuj7/mira8jf7YMXdY9XOmh8H0J6DPDzB8DEjztfPT6BnFGoAv6OgiJe1l0nwwm+aO08cHvwvx28bDKPbxL/QwYIXdvvvlz7EXJCoQpYP9w/ixHOYPzRW0pLAesHGMB57C1kiDw9qsIU8OzwZVMA76mu0QP6H73FNMJPE8QZIwdjXpgbGgBXuoNS+Di70ggfV9YT745/RrYlN+ETcPyN1+hAZIhCVoDM6wg1LQgBzZ1VN46d5IsYGnUDL2gK9JqG+NSDIIBf8JdzEKzGOXwuJtS4YDQGZ/3nXz5qQQbIXQHtoxf16qi6iw+4HL1Gs3/n/tpdsIQ05pVqz1TwlLxDTe+hu3kcl7Qjb4qD1zAy5BnRUS4KoJkJ5BIGsBxHCbazP+T5JDf2Yvyp4P1fK11bijPxqLiAle9W144hBTJTgIsRHPuju6a+PvE8/jDneAzixsGo1U3hucj4wqu+jVHCOXpud9PYr0wUIGe8YD1L/3uwfX9tMelN1mNT9ByILddYIor2EU6skU/2S20fBOturz56Co5IrQDjtEIUKKjt1bUl3WV0WxcE47t2PA9tV4MeB1KCN/JPdZMAV8FnrqugAo6YUI5/hMJvgAMwxzPUjxtsEpWRVBPHMeB5UibmemqV8XjoEkx1V1rnGOC1QBPgeZ+MaQJ2wAFOcYAU0h1clhbunwkoip3680YrapozWtxZfdxRCZ/oa+PN/lsMAE/JDR4jn7ump4nScFIoVxfmoJ6AI5wUIKtXST4zUgx5CUEgzPnRY2aFGeJ5XyyhC6s0sqHgZewxM0kkhaAHRSmRb3/at07c+cG4o7lUo8kDDrCmoGk2UztDowm1SQoi2dRIzk8wtHJsAU93NK4fxQdjyoqK+KwoKQIDsf7G4X7b80crprREykbFnqhWPmNyQp6AJawUIAOgOB8cZ6b/q7fiYpCIo5nQDRvP86ELPLbPAy1QdhZXRB+TbVsmigh88TPnrBF9XXB2DxxgpQA5u3QXkR+3Vx83IXsMfE2W9PfYwyeDXXN16fDvmqiIJq7uxOgWJ8lAM4ZRGiMKYxsg8y76gscgJ+HT9D9XCZ+oDQ32aaYJOAP74MN4qHrd9R7MV0CA9VvFFCN6QE9kBQpCmIDDNEbDZMaH9IXB2dAkxxPaB1REB0uhK3lv+DJSAAUibOSrZwU+XLeArR+2mU+N3eibVs3oOrmvNvbBBUYU5P3fb2gunaNr1occgQFbff31q37UpUwCPthJBe8tSl/fP/iGYoclnU8fxdQ+yO0t5IR4lUpd9T6pcAeY2QDNrgP80OO8Zz/NRJdiO6W/UXCnqsCL7hmDtyYlA00VQfaBAjkuNEFXIH4BBxgpAH3ce+rXeapUbAGoxRnWUBFoT1YEqFMjs5jQ0tW6BgFXqpOtMFOAUPMlE2MnrWcFEpqp4KaGtUc0Er1OgR0VhgI/aJmMp0RgH4QRjBSgi1Cva0s48S1SxxYV8m0EN8vnFENEr8/YB6tKl6zsOaa/r3VvqC1mBH93NgF3ITiAPbOBRIdiiBha6tjYB+ZogAmpFKCaRXkhKfMpBXd/rS0Fh85B0ngz+aBTFS1dGGoIFg1W18Kzn37ogQPMbIDuBm7/L3cFSJ6PyXxGMVXEigWfh/kgpX3oIs2a0BwGes2Nf72yLkyZ2QBN8aTq3WpAzqBtJC78SrQEpi4mTOwDuZm6NERIcwAx3g5nmyolxsFMAQLeay78Bf5AmPGWznS0NKljaxVbk9tlLGBmA3yh5FRcGY0UdqBhO1uKAimCVoPu2cbVClGNeiVgtG5TnDFSgH+7MtCE2rVpPdQa4QkWHffmCoYVtQT7QPdXvRMogy6qEaOxX9GlHzhjy2AIIwXQB+IPbT00jQBD7uUik739RkCD+c4mH6SCdAgw2accn8NDU2Ywd0M1NATEe171SPeBo2r12GS2FXZcaYpL+SDH6Ne/VelqmYFO8BjAWAHSE2HacHuh+udAuWuYVs80SBrCHIIUwYR4Bw6gZ8O//Vl1zZSGrAKx8XjU0vGe9IPjgpq0uRYH6HL+nPEhZPUZTJyoXhceGNWIrRRAgqRtfzFvWTDxpa24l8GCyxYSKuAIxr6AnDHy/RPV67oEZhTWqYjvv37cjfGDL/nStNUken2WewGMUri1uExmFPSesICTVPXKBLdvqxkBclIAYfu+LMDHCm+mpNeLC2pcMpmq8cgJoGu4Ak8zOi1phKmH6AznZJww3AWQJDhJS1Vv0TgFPK1MhbQUCr6QI0o5wEkBkwK55fKOCG4WNItsUsCzNJf51hRLqGiWwAydDbcVELhtyr2Ua3nzzyt5pNA+WNBSvRCej0EgeF31uhB5KoCpt+GhMI5NBeeL4FhnH4iWyG0lWhIpih06oIKHkBmE0t9nugRmBE4K0M26wBd7NiW90D7oa7WPO1SEYQYFliiogJN3zCHvmTFlRlh4/C0YwFUBSr6lbXuOJT1lLl7u/azcehiABeXNbF1nLF8F+HhvOlmMPzCj6Nr5hEwSptWrZvvwZdcDfmSzJZD6MwSC1a023WZ8NiwJciv8ZDe24lagb7pDPDcFhOhOdk7ctdkSSIqgxzDc+0lnBjp5nA2LAyUgtZ6Xbx7pO1GQzjB6oN62R5g1rJABLm1NUQhfZmdFPq4pNZsCzXZ0mv02q9BpBYhJy8grN2BySoTsQ/vgRd+1v4/pYQ1JXxnHBuHBRBGzR5X6HIEF3BSABQ3GFelWT3oE3aS/v7APBy86FVzKYHi4IamR06QBoE9HW+tx9MU9Ye3aTs4r+9Qeoa57D61I272yRvbtys3E9ORxOTObaB8SDKzN1nVVf4oNTN6BYjXSAUNcpUPG4UnS2CyAvedfr1mXZ51WAAkCvZVzlRGqfCJPUFqdHJdbSHB2YxazQ4K4UESC4E0P5YWQ9OWLFhiCc7Yb/mECBqP/eh1wgPvOOE09FEPAtuuRzWngtUR+PINgkU7Sq4TvkvmkGSq3NGbtplJPihSdvpwoiECNLCqa/m9ZdMDSgc6GBcB3mUXTDsaCp3EbielMMTgcOnelnUtjQAogDXVxAN0p8Ux6wF18lv0RJeMGgFRKBYtTjjZjJyGVAqZNLM50szGLZncuzZkY2o1tWbkzHD+mk2N0bNf+QzqkUgBhHV0/9P+PdNddWz+69B+SgZmlcOKaCcoxJ0HnMUW3eaQ5UiuAQN4LGsPNuPcIw/by4fcGWHU/TNGcSddKkzKwI3/0tIAzcNlg4xB9aTCObAdUMbponOexz3mAxXeQZ3/No9eUCbjYVpqUUX1wwzrnJhjlzGDL8yrIGELTjkw4NhN0QaZHlOiESlbJNhVmjyilET7Zl3FcLzjh1nzJBZmugBAGze6ckAUtXDSb0mczC5v9hFwO6eW2FdFjPZddciHIwMtdFDE+//QUTGHIZQVEIVMTHJpsUsw3Dnh0oKyoTf+Gi5xRQtqC6I3SIVAgClHALMIvX+Ag6oHHPwX6EgXG/s394D9Y0RnQFzXQoY8kt3YK8qb6ARPvZ798gT5j8kUN6M4yWDYJ4rJIK7igcAWYwiS2yAz5NZtKxNwe1CYqyNOjCkGfcV3CJ8ztCgiRm0c1afTa2knZ+zkt5l4BIa4Ua1KA+J4KKEV/YY/yXuAGwaq9fAR5ZDKzwI1SwCxkO2L0ctCINcTkkF+dzXzZJxcocPqiBiHeUyuZojZslShRokSJEiVKlChRokSJOcdvv9bUZFlFyYAAAAAASUVORK5CYII=" alt="ChatGPT" width="28" height="28" />
+            </div>
+            <p class="tool-name">ChatGPT</p>
+            <p class="tool-desc">Генерация иллюстраций. Обработка транскрипций интервью респондентов. Создание брендинга B2C приложения</p>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-logo">
+              <!-- Claude / Anthropic logo -->
+              <img src="data:image/png;base64,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" alt="Claude" width="28" height="28" />
+            </div>
+            <p class="tool-name">Claude</p>
+            <p class="tool-desc">Создание прототипов экранов. Сборка анимации в интерфейсе</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="gallery-ph">↓ дальше по тексту — существующая галерея скриншотов, без изменений ↓</div>
+    </div>
+  </div>
+</body>
+</html>
