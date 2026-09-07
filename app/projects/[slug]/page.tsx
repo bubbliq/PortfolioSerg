@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
                   ))}
                 </ul>
               ) : (
-                <p className="font-display text-2xl md:text-3xl leading-snug max-w-prose">
+                <p className="font-display text-2xl md:text-3xl leading-snug">
                   {project.outcome}
                 </p>
               )}
