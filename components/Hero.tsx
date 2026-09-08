@@ -43,7 +43,7 @@ export function Hero() {
           {site.shortBio}
         </p>
         <div className="flex flex-wrap gap-3">
-          <CTAButton href={site.telegram} variant="primary" external>
+          <CTAButton href={site.telegram} variant="primary" external className="w-[200px] justify-center">
             Telegram
             <span aria-hidden>↗</span>
           </CTAButton>
