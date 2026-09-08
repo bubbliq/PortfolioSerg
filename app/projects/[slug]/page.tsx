@@ -178,9 +178,11 @@ function Meta({ label, children }: { label: string; children: React.ReactNode })
 
 function SectionBlock({ section, index }: { section: ProjectSection; index: number }) {
   if (section.kind === 'gallery') {
+    let body: React.ReactNode;
+
     // --- Rows-mode: explicit groupings, equal columns per row, natural aspect (no crop) ---
     if (section.rows && section.rows.length > 0) {
-      return (
+      body = (
         <div className="space-y-6 md:space-y-8">
           {section.rows.map((row, ri) => (
             <div
@@ -204,11 +206,9 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
           ))}
         </div>
       );
-    }
-
-    // --- Fit-mode: stack at natural aspect, no crop. maxWidth optional (default 768) ---
-    if (section.layout === 'fit' && section.images) {
-      return (
+    } else if (section.layout === 'fit' && section.images) {
+      // --- Fit-mode: stack at natural aspect, no crop. maxWidth optional (default 768) ---
+      body = (
         <div
           className="mx-auto space-y-6 md:space-y-8"
           style={{ maxWidth: section.maxWidth ?? 768 }}
@@ -228,25 +228,36 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
           ))}
         </div>
       );
+    } else {
+      // --- Legacy: per-image aspect in 12-col grid (kept for View), natural aspect, no crop ---
+      const images = section.images ?? [];
+      body = (
+        <div className="mx-auto max-w-3xl grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
+          {images.map((img, i) => (
+            <div
+              key={i}
+              className="overflow-hidden rounded-xl bg-ink-800 border hairline"
+            >
+              <img
+                src={withBase(img.src)}
+                alt={img.alt || ''}
+                loading="lazy"
+                className="w-full h-auto block"
+              />
+            </div>
+          ))}
+        </div>
+      );
     }
 
-    // --- Legacy: per-image aspect in 12-col grid (kept for View), natural aspect, no crop ---
-    const images = section.images ?? [];
+    if (!section.title) return <>{body}</>;
+
     return (
-      <div className="mx-auto max-w-3xl grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
-        {images.map((img, i) => (
-          <div
-            key={i}
-            className="overflow-hidden rounded-xl bg-ink-800 border hairline"
-          >
-            <img
-              src={withBase(img.src)}
-              alt={img.alt || ''}
-              loading="lazy"
-              className="w-full h-auto block"
-            />
-          </div>
-        ))}
+      <div className="space-y-8 md:space-y-10">
+        <h3 className="font-display text-xl md:text-2xl font-medium leading-tight tracking-tight">
+          {section.title}
+        </h3>
+        {body}
       </div>
     );
   }

@@ -6,6 +6,7 @@ export type ProjectSection =
   | { kind: 'tools'; title?: string; items: { name: string; logo: string; description: string }[] }
   | {
       kind: 'gallery';
+      title?: string;
       images?: { src: string; alt?: string; aspect?: 'wide' | 'tall' | 'square' }[];
       // Explicit rows: each inner array is one row, all items share equal width.
       // Use when the editor wants precise control over which screens sit next to each other.
@@ -138,7 +139,7 @@ export const projects: Project[] = [
       },
       {
         kind: 'tools',
-        title: 'Инструменты',
+        title: 'Всеми любимы AI',
         items: [
           {
             name: 'ChatGPT',
@@ -155,15 +156,45 @@ export const projects: Project[] = [
       },
       {
         kind: 'gallery',
+        title: 'Главный экран',
         rowAspect: 'tall',
-        rows: [
-          [img('healthfit', 1), img('healthfit', 2), img('healthfit', 3), img('healthfit', 4)],
-          [img('healthfit', 5), img('healthfit', 6), img('healthfit', 7)],
-          [img('healthfit', 8), img('healthfit', 9), img('healthfit', 10), img('healthfit', 11)],
-          [img('healthfit', 12), img('healthfit', 13), img('healthfit', 14)],
-          [img('healthfit', 15), img('healthfit', 16), img('healthfit', 17)],
-          [img('healthfit', 18)],
-        ],
+        rows: [[img('healthfit', 1), img('healthfit', 2), img('healthfit', 3)]],
+      },
+      {
+        kind: 'gallery',
+        title: 'Мои активности',
+        rowAspect: 'tall',
+        rows: [[img('healthfit', 4)]],
+      },
+      {
+        kind: 'gallery',
+        title: 'Каталог и карточка тренировки',
+        rowAspect: 'tall',
+        rows: [[img('healthfit', 5), img('healthfit', 6), img('healthfit', 7)]],
+      },
+      {
+        kind: 'gallery',
+        title: 'ИИ помощник',
+        rowAspect: 'tall',
+        rows: [[img('healthfit', 8), img('healthfit', 9), img('healthfit', 10), img('healthfit', 11)]],
+      },
+      {
+        kind: 'gallery',
+        title: 'Профиль и персональные настройки',
+        rowAspect: 'tall',
+        rows: [[img('healthfit', 12), img('healthfit', 13), img('healthfit', 14)]],
+      },
+      {
+        kind: 'gallery',
+        title: 'Активности пользователей и чаты',
+        rowAspect: 'tall',
+        rows: [[img('healthfit', 15), img('healthfit', 16), img('healthfit', 17)]],
+      },
+      {
+        kind: 'gallery',
+        title: 'Маркетплейс',
+        rowAspect: 'tall',
+        rows: [[img('healthfit', 18), img('healthfit', 19)]],
       },
     ],
     outcome: [
