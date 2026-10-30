@@ -5,6 +5,7 @@ import { site, withBase } from '@/lib/site';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CTAButton } from '@/components/CTAButton';
+import { CompareGallery } from '@/components/CompareGallery';
 
 type Params = Promise<{ slug: string }>;
 
@@ -206,6 +207,20 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
           ))}
         </div>
       );
+
+      // Old-version toggle: one "before" screen sized like a single column of the first row.
+      if (section.old) {
+        const cols = section.rows[0].length;
+        body = (
+          <CompareGallery
+            oldSrc={withBase(section.old)}
+            oldWrapClassName={`mx-auto ${rowMaxWidth(cols)}`}
+            cols={cols}
+          >
+            {body}
+          </CompareGallery>
+        );
+      }
     } else if (section.layout === 'fit' && section.images) {
       // --- Fit-mode: stack at natural aspect, no crop. maxWidth optional (default 768) ---
       body = (

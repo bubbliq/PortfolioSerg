@@ -11,6 +11,9 @@ export type ProjectSection =
       // Explicit rows: each inner array is one row, all items share equal width.
       // Use when the editor wants precise control over which screens sit next to each other.
       rows?: string[][];
+      // Optional "before" screen for this section. When set, clicking the gallery
+      // swaps all new screens for this single old one (and back).
+      old?: string;
       // 'fit' = stack each image at natural aspect, full width, no crop (good for web shots).
       // 'crop' (default for rows / legacy) = uniform aspect frame, object-cover.
       layout?: 'fit' | 'crop';
@@ -41,6 +44,7 @@ export type Project = {
 };
 
 const img = (slug: string, n: number) => `/projects/${slug}/${n}.png`;
+const oldImg = (slug: string, n: number) => `/projects/${slug}/${n}-old.png`;
 
 // Array order = display order on the home grid and the "next project" navigation.
 export const projects: Project[] = [
@@ -158,42 +162,49 @@ export const projects: Project[] = [
       {
         kind: 'gallery',
         title: 'Главный экран',
+        old: oldImg('healthfit', 1),
         rowAspect: 'tall',
         rows: [[img('healthfit', 1), img('healthfit', 2), img('healthfit', 3)]],
       },
       {
         kind: 'gallery',
         title: 'Мои активности',
+        old: oldImg('healthfit', 2),
         rowAspect: 'tall',
         rows: [[img('healthfit', 4)]],
       },
       {
         kind: 'gallery',
         title: 'Каталог и карточка тренировки',
+        old: oldImg('healthfit', 3),
         rowAspect: 'tall',
         rows: [[img('healthfit', 5), img('healthfit', 6), img('healthfit', 7)]],
       },
       {
         kind: 'gallery',
         title: 'ИИ помощник',
+        old: oldImg('healthfit', 4),
         rowAspect: 'tall',
         rows: [[img('healthfit', 8), img('healthfit', 9), img('healthfit', 10), img('healthfit', 11)]],
       },
       {
         kind: 'gallery',
         title: 'Профиль и персональные настройки',
+        old: oldImg('healthfit', 5),
         rowAspect: 'tall',
         rows: [[img('healthfit', 12), img('healthfit', 13), img('healthfit', 14)]],
       },
       {
         kind: 'gallery',
         title: 'Активности пользователей и чаты',
+        old: oldImg('healthfit', 6),
         rowAspect: 'tall',
         rows: [[img('healthfit', 15), img('healthfit', 16), img('healthfit', 17)]],
       },
       {
         kind: 'gallery',
         title: 'Маркетплейс',
+        old: oldImg('healthfit', 7),
         rowAspect: 'tall',
         rows: [[img('healthfit', 18), img('healthfit', 19)]],
       },
