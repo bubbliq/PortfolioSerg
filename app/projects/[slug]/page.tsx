@@ -4,7 +4,6 @@ import { projects, getProject, type ProjectSection } from '@/lib/projects';
 import { site, withBase } from '@/lib/site';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { CTAButton } from '@/components/CTAButton';
 import { CompareGallery } from '@/components/CompareGallery';
 
 type Params = Promise<{ slug: string }>;
@@ -118,26 +117,6 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </div>
       </article>
 
-      {/* CTAs duplicated on project pages too — both Telegram and CV */}
-      <section className="px-6 md:px-10 pb-24 md:pb-32">
-        <div className="mx-auto max-w-page text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-chalk-300 mb-6">
-            Понравилось?
-          </p>
-          <h2 className="font-display font-medium leading-[1] tracking-tightest text-[clamp(2rem,5vw,4rem)] mb-10">
-            Обсудим ваш проект.
-          </h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            <CTAButton href={site.telegram} variant="primary" external>
-              Telegram <span aria-hidden>↗</span>
-            </CTAButton>
-            <CTAButton href={site.cv} variant="secondary" external download>
-              Скачать CV <span aria-hidden>↓</span>
-            </CTAButton>
-          </div>
-        </div>
-      </section>
-
       {/* Next project */}
       <section className="border-t hairline px-6 md:px-10 py-16 md:py-24">
         <div className="mx-auto max-w-page">
@@ -177,6 +156,15 @@ function Meta({ label, children }: { label: string; children: React.ReactNode })
   );
 }
 
+function MetricCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="mx-auto w-full max-w-[480px] rounded-[28px] bg-[#202122] px-6 py-5 sm:px-7 sm:py-6">
+      <p className="text-xl text-chalk-300">{label}</p>
+      <p className={`mt-2 leading-tight tracking-tight text-chalk-50 ${value.length > 10 ? 'text-xl sm:text-2xl' : 'text-3xl sm:text-4xl'}`}>{value}</p>
+    </div>
+  );
+}
+
 function SectionBlock({ section, index }: { section: ProjectSection; index: number }) {
   if (section.kind === 'gallery') {
     let body: React.ReactNode;
@@ -208,13 +196,18 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
         </div>
       );
 
-      // Old-version toggle: one "before" screen sized like a single column of the first row.
+      // Old-version toggle: "before" screens, each sized like one column of the first row.
       if (section.old) {
         const cols = section.rows[0].length;
+        const controlWrapClassName =
+          section.title === 'Главный экран' || section.title === 'Мои активности'
+            ? 'mx-auto max-w-2xl'
+            : undefined;
         body = (
           <CompareGallery
-            oldSrc={withBase(section.old)}
+            oldSrcs={section.old.map((s) => withBase(s))}
             oldWrapClassName={`mx-auto ${rowMaxWidth(cols)}`}
+            controlWrapClassName={controlWrapClassName}
             cols={cols}
           >
             {body}
@@ -272,6 +265,10 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
         <h3 className="font-display text-xl md:text-2xl font-medium leading-tight tracking-tight">
           {section.title}
         </h3>
+        
+        {section.metric && (
+          <MetricCard label={section.metric.label} value={section.metric.value} />
+        )}
         {body}
       </div>
     );
@@ -425,3 +422,8 @@ function SectionLabel({ index, children }: { index: number; children: React.Reac
     </div>
   );
 }
+
+
+
+
+

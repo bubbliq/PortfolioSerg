@@ -28,7 +28,7 @@ export function Hero() {
             style={{ width: 246, height: 246 }}
           >
             <img
-              src={withBase('/Avatar.jpg')}
+              src={withBase('/avatar-v2.jpg')}
               alt={`${site.name} — фото`}
               width={246}
               height={246}

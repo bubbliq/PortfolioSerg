@@ -1,22 +1,24 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { withBase } from '@/lib/site';
 
 const FADE_MS = 220;
 
 /**
- * Wraps a gallery of new screens. Clicking it swaps the whole gallery for a single
- * "old version" screen (sized like one column of the gallery), and back again.
+ * Shows the redesigned gallery by default and lets visitors switch to the old screens.
  */
 export function CompareGallery({
   children,
-  oldSrc,
+  oldSrcs,
   oldWrapClassName,
+  controlWrapClassName,
   cols,
 }: {
   children: React.ReactNode;
-  oldSrc: string;
+  oldSrcs: string[];
   oldWrapClassName: string;
+  controlWrapClassName?: string;
   cols: number;
 }) {
   const [showOld, setShowOld] = useState(false);
@@ -28,17 +30,19 @@ export function CompareGallery({
   const preload = () => {
     if (preloaded.current) return;
     preloaded.current = true;
-    const img = new Image();
-    img.src = oldSrc;
+    for (const src of oldSrcs) {
+      const img = new Image();
+      img.src = src;
+    }
   };
 
-  const toggle = () => {
-    if (busy.current) return;
+  const switchVersion = (nextShowOld: boolean) => {
+    if (busy.current || nextShowOld === showOld) return;
     busy.current = true;
     preload();
     setVisible(false);
     window.setTimeout(() => {
-      setShowOld((v) => !v);
+      setShowOld(nextShowOld);
       setVisible(true);
       busy.current = false;
     }, FADE_MS);
@@ -46,47 +50,72 @@ export function CompareGallery({
 
   // One column of the gallery on desktop: (100% - gaps) / cols. Gap is 1.5rem at md.
   const colWidth = `calc((100% - ${(cols - 1) * 1.5}rem) / ${cols})`;
+  const leftEnabled = showOld && visible;
+  const rightEnabled = !showOld && visible;
+  const iconButtonClass = 'inline-flex size-11 shrink-0 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-chalk-50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]';
 
   return (
     <div className="space-y-4">
-      <button
-        type="button"
-        onClick={toggle}
+      <div
+        className="transition-opacity ease-out"
+        style={{ opacity: visible ? 1 : 0, transitionDuration: `${FADE_MS}ms` }}
+      >
+        {showOld ? (
+          <div
+            className={`${oldWrapClassName} flex flex-col md:flex-row md:justify-center items-start gap-4 md:gap-6`}
+            style={{ ['--col-w' as string]: colWidth }}
+          >
+            {oldSrcs.map((src, i) => (
+              <div
+                key={i}
+                className="w-full md:w-[var(--col-w)] md:shrink-0 overflow-hidden rounded-xl bg-ink-800 border hairline"
+              >
+                <img src={src} alt="Старая версия" className="w-full h-auto block" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          children
+        )}
+      </div>
+
+      <div
+        className={`${controlWrapClassName ?? oldWrapClassName} flex min-h-[104px] items-center justify-center gap-2 rounded-2xl px-4 py-4 sm:gap-4 sm:px-6`}
         onPointerEnter={preload}
         onFocus={preload}
         onTouchStart={preload}
-        aria-pressed={showOld}
-        aria-label={showOld ? 'Показать новую версию' : 'Показать старую версию'}
-        className="block w-full cursor-pointer text-left rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-chalk-50/60 focus-visible:ring-offset-4 focus-visible:ring-offset-ink-900"
       >
-        <div
-          className="transition-opacity ease-out"
-          style={{ opacity: visible ? 1 : 0, transitionDuration: `${FADE_MS}ms` }}
+        <button
+          type="button"
+          onClick={() => switchVersion(false)}
+          disabled={!leftEnabled}
+          aria-label="Показать после редизайна"
+          className={iconButtonClass}
         >
-          {showOld ? (
-            <div className={oldWrapClassName}>
-              <div
-                className="mx-auto w-full md:w-[var(--col-w)] overflow-hidden rounded-xl bg-ink-800 border hairline"
-                style={{ ['--col-w' as string]: colWidth }}
-              >
-                <img src={oldSrc} alt="Старая версия" className="w-full h-auto block" />
-              </div>
-            </div>
-          ) : (
-            children
-          )}
-        </div>
-      </button>
+          <img src={withBase(leftEnabled ? '/icons/Icon-Button-LeftON.svg' : '/icons/Icon-Button-LeftOFF.svg')} alt="" width={44} height={44} />
+        </button>
 
-      <p
-        aria-live="polite"
-        className="flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-wider text-chalk-300 select-none"
-      >
-        <span aria-hidden>↻</span>
-        {showOld
-          ? 'Старая версия · Нажми, чтобы вернуться к новой'
-          : 'Нажми, чтобы посмотреть старую версию'}
-      </p>
+        <p
+          aria-live="polite"
+          className="text-center text-xl font-medium tracking-tight text-chalk-50 sm:text-2xl"
+        >
+          {showOld ? 'До редизайна' : 'После редизайна'} <span aria-hidden="true">👆🏻</span>
+        </p>
+
+        <button
+          type="button"
+          onClick={() => switchVersion(true)}
+          disabled={!rightEnabled}
+          aria-label="Показать старую версию"
+          className={iconButtonClass}
+        >
+          <img src={withBase(rightEnabled ? '/icons/Icon-Button-RightON.svg' : '/icons/Icon-Button-RightOFF.svg')} alt="" width={44} height={44} />
+        </button>
+      </div>
     </div>
   );
 }
+
+
+
+
