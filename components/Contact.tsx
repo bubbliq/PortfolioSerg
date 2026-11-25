@@ -5,7 +5,7 @@ export function Contact() {
   return (
     <section id="contact" className="px-6 md:px-10 py-28 md:py-44 border-t hairline relative overflow-hidden">
       <div className="mx-auto max-w-page text-center">
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-chalk-300 mb-6">
+        <p className="font-display font-medium text-xs uppercase tracking-[0.18em] text-chalk-300 mb-6">
           Открыт к новым проектам
         </p>
         <h2 className="font-display font-medium leading-[0.95] tracking-tightest text-[clamp(2.5rem,9vw,9rem)]">
@@ -31,10 +31,6 @@ export function Contact() {
           <span aria-hidden className="text-chalk-500">·</span>
           <a href={site.telegram} target="_blank" rel="noreferrer" className="underline-grow">
             Telegram {site.telegramHandle}
-          </a>
-          <span aria-hidden className="text-chalk-500">·</span>
-          <a href={site.behance} target="_blank" rel="noreferrer" className="underline-grow">
-            Behance
           </a>
         </div>
       </div>

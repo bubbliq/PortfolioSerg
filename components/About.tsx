@@ -1,5 +1,3 @@
-import { site } from '@/lib/site';
-
 const facts = [
   { k: '4+', v: 'года в продуктовом дизайне' },
   { k: '2', v: 'компании в опыте' },
@@ -8,37 +6,28 @@ const facts = [
 ];
 
 const stack = [
-  ['Дизайн', ['Product design', 'UX/UI', 'Дизайн-системы', 'Прототипирование']],
-  ['Исследования', ['JTBD', 'CJM', 'Юзабилити-тесты', 'Глубинные интервью']],
-  ['Инструменты', ['Figma', 'FigJam', 'Notion', 'Jira / Kanban']],
-  ['Процессы', ['Гипотезы → метрики', 'Защита решений', 'Работа с фидбеком']],
+  ['Исследования', ['Глубинные интервью', 'Юзабилити-тесты', 'Проверка гипотез на прототипах']],
+  ['Аналитика', ['DataLens и Яндекс Метрика', 'Разбор обратной связи от пользователей']],
+  ['Дизайн', ['Прототипирование в Figma', 'Создание и поддержка дизайн-систем', 'Дизайн-ревью']],
+  ['ИИ в работе команды', ['Обработка интервью', 'Прототипирование', 'Создание анимации и иллюстраций']],
 ];
 
 export function About() {
   return (
-    <section id="about" className="px-6 md:px-10 py-24 md:py-32 border-t hairline">
-      <div className="mx-auto max-w-page grid md:grid-cols-12 gap-12">
+    <section id="about" className="px-[max(16px,3.5%)] py-24 md:py-32 border-t hairline">
+      <div className="mx-auto w-full grid md:grid-cols-12 gap-12">
         <div className="md:col-span-5">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-chalk-300 mb-4">
-            Обо мне
-          </p>
           <h2 className="font-display font-medium leading-[1.02] tracking-tightest text-[clamp(2rem,4.5vw,4rem)]">
-            Дизайнер,<br />
-            который дружит<br />
-            <span className="text-chalk-300">с метриками.</span>
+            Помогаю людям <span className="text-chalk-300">тратить меньше времени на привычные задачи.</span>
           </h2>
         </div>
 
         <div className="md:col-span-7 space-y-10">
           <p className="text-lg md:text-xl leading-snug text-chalk-100 max-w-prose">
-            Product Designer с опытом в B2C и B2B. Работаю в продукте полным циклом:
-            исследование → гипотезы → концепции → тестирование → внедрение. Защищаю
-            UX-решения данными и пользовательскими инсайтами.
+            Я продуктовый дизайнер. Больше четырёх лет проектирую мобильные приложения и веб-сервисы. В «Кросслайфе» работаю с обеими сторонами одной платформы: сотрудники выбирают льготы и следят за здоровьем, а HR-команды создают события и смотрят статистику.
           </p>
           <p className="text-base text-chalk-300 max-w-prose">
-            Сейчас в Кросслайфе делаю well-being платформу, кафетерий льгот и админ-панель
-            для HR. До этого — мобильные продукты в КИБЕР-РОМ и фриланс-проекты, включая
-            трамвайную линию «Славянка» в Санкт-Петербурге.
+            Чтобы понять, где человек теряет время, сверяю его отзывы с данными, проверяю решение на прототипе и после запуска смотрю, что изменилось. Раньше спроектировал и запустил в «КИБЕР-РОМ» первую версию приложения для покупок Cheers! Up. Для трамвайной линии «Славянка» спроектировал мобильное приложение с нуля.
           </p>
 
           <dl className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-4">
@@ -47,7 +36,7 @@ export function About() {
                 <dt className="font-display text-4xl md:text-5xl font-medium leading-none tracking-tight">
                   {f.k}
                 </dt>
-                <dd className="mt-3 text-xs font-mono uppercase tracking-wider text-chalk-300">
+                <dd className="mt-3 text-xs font-display font-medium text-chalk-300">
                   {f.v}
                 </dd>
               </div>
@@ -57,7 +46,7 @@ export function About() {
           <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8 pt-6 border-t hairline">
             {stack.map(([title, items]) => (
               <div key={title as string}>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-chalk-300 mb-3">
+                <p className="font-display font-medium text-[11px] uppercase tracking-wider text-chalk-300 mb-3">
                   {title}
                 </p>
                 <ul className="space-y-1.5">

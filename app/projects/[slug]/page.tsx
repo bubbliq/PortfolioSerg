@@ -39,13 +39,15 @@ export default async function ProjectPage({ params }: { params: Params }) {
         <div className="mx-auto max-w-page">
           <Link
             href="/#projects"
-            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-chalk-300 underline-grow"
+            className="inline-flex items-center gap-2 font-display font-medium text-xs uppercase tracking-wider text-chalk-300 underline-grow"
           >
             <span aria-hidden>←</span> Все проекты
           </Link>
 
-          <h1 className="mt-10 font-display font-medium leading-[0.95] tracking-tightest text-[clamp(2.5rem,7vw,7rem)] max-w-[14ch]">
-            {project.title}
+          <h1 key={project.slug} aria-label={project.title} className="case-title mt-10 font-display font-medium leading-[0.95] tracking-tightest text-[clamp(2.5rem,7vw,7rem)] max-w-[14ch]">
+            {project.title.split(' ').map((word, i) => (
+              <span key={i} aria-hidden="true"><span style={{ animationDelay: i * 65 + 'ms' }}>{word}</span>{' '}</span>
+            ))}
           </h1>
           <p className="mt-6 max-w-prose text-lg md:text-xl text-chalk-100">
             {project.tagline}
@@ -81,7 +83,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
         <section className="px-6 md:px-10 pt-16 md:pt-24">
           <div className="mx-auto max-w-page">
             <div className="rounded-2xl border hairline p-8 md:p-12 bg-ink-800/50">
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-chalk-300 mb-4">
+              <p className="font-display font-medium text-xs uppercase tracking-[0.18em] text-chalk-300 mb-4">
                 Результат
               </p>
               {Array.isArray(project.outcome) ? (
@@ -121,7 +123,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
       <section className="border-t hairline px-6 md:px-10 py-16 md:py-24">
         <div className="mx-auto max-w-page">
           <Link href={`/projects/${next.slug}`} className="group block">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-chalk-300 mb-3">
+            <p className="font-display font-medium text-xs uppercase tracking-[0.18em] text-chalk-300 mb-3">
               Следующий проект
             </p>
             <div className="flex flex-wrap items-end justify-between gap-6">
@@ -148,7 +150,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
 function Meta({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <dt className="font-mono text-[11px] uppercase tracking-wider text-chalk-300 mb-2">
+      <dt className="font-display font-medium text-[11px] uppercase tracking-wider text-chalk-300 mb-2">
         {label}
       </dt>
       <dd className="text-sm md:text-base text-chalk-100">{children}</dd>
@@ -291,7 +293,7 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
                     className="w-7 h-7 object-contain"
                   />
                 </div>
-                <p className="font-mono text-[11px] uppercase tracking-wider text-chalk-300 mb-2">
+                <p className="font-display font-medium text-[11px] uppercase tracking-wider text-chalk-300 mb-2">
                   {tool.name}
                 </p>
                 <p className="text-base leading-snug text-chalk-100">{tool.description}</p>
@@ -313,11 +315,11 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
           <ul className="border-t border-b hairline divide-y divide-[var(--hairline)]">
             {section.items.map((h, i) => (
               <li key={i} className="py-6 grid md:grid-cols-12 gap-4">
-                <span className="md:col-span-1 font-mono text-xs text-chalk-300">
+                <span className="md:col-span-1 font-display font-medium text-xs text-chalk-300">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p className="md:col-span-7 text-base md:text-lg leading-snug">{h.hypothesis}</p>
-                <span className="md:col-span-2 font-mono text-xs uppercase tracking-wider text-chalk-100">
+                <span className="md:col-span-2 font-display font-medium text-xs uppercase tracking-wider text-chalk-100">
                   {h.result}
                 </span>
                 <p className="md:col-span-2 text-sm text-chalk-300">{h.insight}</p>
@@ -339,7 +341,7 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
           <ul className="space-y-4">
             {section.items.map((item, i) => (
               <li key={i} className="flex gap-4 text-lg md:text-xl leading-snug border-b hairline pb-4 last:border-b-0">
-                <span className="font-mono text-xs text-chalk-300 pt-2 shrink-0">
+                <span className="font-display font-medium text-xs text-chalk-300 pt-2 shrink-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span>{item}</span>
@@ -358,7 +360,7 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
           «{section.text}»
         </p>
         {section.author && (
-          <footer className="mt-6 font-mono text-xs uppercase tracking-wider text-chalk-300">
+          <footer className="mt-6 font-display font-medium text-xs uppercase tracking-wider text-chalk-300">
             — {section.author}
           </footer>
         )}
@@ -413,7 +415,7 @@ function rowMaxWidth(n: number): string {
 function SectionLabel({ index, children }: { index: number; children: React.ReactNode }) {
   return (
     <div>
-      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-chalk-300 mb-3">
+      <p className="font-display font-medium text-[11px] uppercase tracking-[0.18em] text-chalk-300 mb-3">
         — {String(index + 1).padStart(2, '0')}
       </p>
       <h2 className="font-display text-2xl md:text-3xl font-medium leading-tight tracking-tight">

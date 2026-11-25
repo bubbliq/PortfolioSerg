@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Manrope, JetBrains_Mono } from 'next/font/google';
+import { Inter, Manrope } from 'next/font/google';
 import './globals.css';
 
 const sans = Inter({
@@ -12,13 +12,7 @@ const display = Manrope({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-display',
   display: 'swap',
-  weight: ['400', '500', '700', '800'],
-});
-
-const mono = JetBrains_Mono({
-  subsets: ['latin', 'cyrillic'],
-  variable: '--font-mono',
-  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -36,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={`${sans.variable} ${display.variable} ${mono.variable}`}>
+    <html lang="ru" className={`${sans.variable} ${display.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

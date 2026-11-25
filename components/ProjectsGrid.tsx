@@ -1,16 +1,12 @@
-import Link from 'next/link';
 import { projects } from '@/lib/projects';
 import { withBase } from '@/lib/site';
 
 export function ProjectsGrid() {
   return (
-    <section id="projects" className="relative px-6 md:px-10 py-24 md:py-40">
-      <div className="mx-auto max-w-page">
+    <section id="projects" className="relative px-[max(16px,3.5%)] py-24 md:py-32">
+      <div className="mx-auto w-full">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-20">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-chalk-300 mb-4">
-              Избранные проекты · {String(projects.length).padStart(2, '0')}
-            </p>
             <h2 className="font-display font-medium leading-none tracking-tightest text-[clamp(2rem,5vw,4.5rem)]">
               Работа
             </h2>
@@ -20,59 +16,32 @@ export function ProjectsGrid() {
           </p>
         </div>
 
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {projects.map((p, idx) => {
-            return (
-              <li key={p.slug} className="group">
-                <Link href={`/projects/${p.slug}`} className="block">
-                  <div className="relative overflow-hidden rounded-2xl bg-ink-800 hairline border aspect-[4/3]">
-                    {p.cardImage ? (
-                      <img
-                        src={withBase(p.cardImage)}
-                        alt={p.title}
-                        loading="lazy"
-                        className="card-img absolute inset-0 w-full h-full object-contain"
-                      />
-                    ) : (
-                      <PlaceholderCard title={p.title} />
-                    )}
-                    {/* Soft top + bottom shading so the meta text stays readable, image stays clean in the middle. */}
-                    <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-ink-900/70 to-transparent" />
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-900/90 to-transparent" />
-                    <div className="absolute top-4 left-5 right-5 flex items-center justify-between text-xs font-mono uppercase tracking-wider text-chalk-100/80">
-                      <span>{String(idx + 1).padStart(2, '0')}</span>
-                      <span>{p.year}</span>
-                    </div>
-                    <div className="absolute bottom-5 left-5 right-5">
-                      <div className="flex items-end justify-between gap-4">
-                        <div>
-                          <h3 className="font-display text-2xl md:text-3xl font-medium leading-none tracking-tight">
-                            {p.title}
-                          </h3>
-                          <p className="mt-2 text-sm text-chalk-100/80 max-w-md line-clamp-2">
-                            {p.tagline}
-                          </p>
-                        </div>
-                        <span
-                          aria-hidden
-                          className="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full border border-chalk-50/30 text-chalk-50 transition-all duration-500 ease-soft group-hover:bg-chalk-50 group-hover:text-ink-900 group-hover:rotate-45"
-                        >
-                          →
-                        </span>
-                      </div>
-                    </div>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {projects.map((p, idx) => (
+            <li key={p.slug} className="group min-w-0">
+              <a href={withBase(`/projects/${p.slug}/`)} className="project-panel">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink-800">
+                  {p.cardImage ? (
+                    <img src={withBase(p.cardImage)} alt={p.title} loading="lazy" className="card-img absolute inset-0 h-full w-full object-contain" />
+                  ) : <PlaceholderCard title={p.title} />}
+                </div>
+                <div className="flex flex-1 flex-col gap-3 px-2 pt-5 pb-2 md:px-4">
+                  <div className="flex justify-between gap-3 font-display font-medium text-xs text-chalk-300">
+                    <span>{String(idx + 1).padStart(2, '0')}</span>
+                    <span>{p.year}</span>
                   </div>
-                  <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-chalk-300">
-                    <span>{p.role}</span>
-                    {p.company && <span className="text-chalk-500">·</span>}
-                    {p.company && <span>{p.company}</span>}
-                    <span className="text-chalk-500">·</span>
-                    <span>{p.platforms.join(' / ')}</span>
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="font-display text-2xl font-medium tracking-tight md:text-3xl">{p.title}</h3>
+                    <span aria-hidden="true" className="project-arrow">↗</span>
                   </div>
-                </Link>
-              </li>
-            );
-          })}
+                  <p className="max-w-prose text-sm text-chalk-100">{p.tagline}</p>
+                  <p className="mt-auto pt-3 font-display font-medium text-xs text-chalk-300">
+                    {[p.role, p.company, p.platforms.join(' / ')].filter(Boolean).join(' · ')}
+                  </p>
+                </div>
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </section>

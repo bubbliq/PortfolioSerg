@@ -53,7 +53,7 @@ export function CompareRow({
 
       <p
         aria-live="polite"
-        className="flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-wider text-chalk-300 select-none"
+        className="flex items-center justify-center gap-2 font-display font-medium text-xs uppercase tracking-wider text-chalk-300 select-none"
       >
         <span aria-hidden>↻</span>
         {showOld
