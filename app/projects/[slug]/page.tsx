@@ -198,7 +198,7 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
 
       // Old-version toggle: "before" screens, each sized like one column of the first row.
       if (section.old) {
-        const cols = section.rows[0].length;
+        const cols = Math.max(section.rows[0].length, section.old.length);
         const controlWrapClassName =
           section.title === 'Главный экран' || section.title === 'Мои активности'
             ? 'mx-auto max-w-2xl'
