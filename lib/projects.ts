@@ -164,7 +164,7 @@ export const projects: Project[] = [
       {
         kind: 'gallery',
         title: 'Регистрация',
-        metric: { label: 'Затраты на регистрацию', value: '-46%' },
+        metric: { label: 'Время прохождения регистрации', value: '-46%' },
         rowAspect: 'tall',
         old: [hf('reg-old', 1), hf('reg-old', 2), hf('reg-old', 3)],
         rows: [[hf('reg', 1), hf('reg', 2)]],
