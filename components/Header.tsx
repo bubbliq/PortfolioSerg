@@ -4,7 +4,7 @@ import { site } from '@/lib/site';
 export function Header({ wide = false }: { wide?: boolean }) {
   return (
     <header className={`fixed top-0 inset-x-0 z-50 ${wide ? 'text-white' : 'mix-blend-difference text-chalk-50'}`}>
-      <div className={`mx-auto py-5 flex items-center justify-between ${wide ? 'px-[max(16px,3.5%)]' : 'max-w-page px-6 md:px-10'}`}>
+      <div className={`mx-auto py-5 flex items-center justify-between px-[max(16px,3.5%)]`}>
         <Link
           href="/"
           className="inline-flex items-center"

@@ -4,7 +4,6 @@ import { projects, getProject, type ProjectSection } from '@/lib/projects';
 import { site, withBase } from '@/lib/site';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { CompareGallery } from '@/components/CompareGallery';
 
 type Params = Promise<{ slug: string }>;
 
@@ -35,8 +34,8 @@ export default async function ProjectPage({ params }: { params: Params }) {
       <Header />
 
       {/* Case hero */}
-      <section className="pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-10">
-        <div className="mx-auto max-w-page">
+      <section className="pt-32 md:pt-40 pb-16 md:pb-24 px-[max(16px,3.5%)]">
+        <div className="mx-auto w-full">
           <Link
             href="/#projects"
             className="inline-flex items-center gap-2 font-display font-medium text-xs uppercase tracking-wider text-chalk-300 underline-grow"
@@ -65,7 +64,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
 
       {/* Cover image — default 320px (mobile-screen size), per-project override via coverWidth */}
       {project.cover && (
-        <div className="px-6 md:px-10">
+        <div className="px-[max(16px,3.5%)]">
           <div className="mx-auto" style={{ maxWidth: project.coverWidth ?? 320 }}>
             <div className="overflow-hidden rounded-2xl bg-ink-800 hairline border">
               <img
@@ -80,8 +79,8 @@ export default async function ProjectPage({ params }: { params: Params }) {
 
       {/* Outcome — surfaced right after the cover, before the deep-dive sections */}
       {project.outcome && (
-        <section className="px-6 md:px-10 pt-16 md:pt-24">
-          <div className="mx-auto max-w-page">
+        <section className="px-[max(16px,3.5%)] pt-16 md:pt-24">
+          <div className="mx-auto w-full">
             <div className="rounded-2xl border hairline p-8 md:p-12 bg-ink-800/50">
               <p className="font-display font-medium text-xs uppercase tracking-[0.18em] text-chalk-300 mb-4">
                 Результат
@@ -111,8 +110,8 @@ export default async function ProjectPage({ params }: { params: Params }) {
       )}
 
       {/* Sections */}
-      <article className="px-6 md:px-10 py-20 md:py-32">
-        <div className="mx-auto max-w-page space-y-20 md:space-y-32">
+      <article className="px-[max(16px,3.5%)] py-20 md:py-32">
+        <div className="mx-auto w-full space-y-20 md:space-y-32">
           {project.sections.map((section, i) => (
             <SectionBlock key={i} section={section} index={i} />
           ))}
@@ -120,8 +119,8 @@ export default async function ProjectPage({ params }: { params: Params }) {
       </article>
 
       {/* Next project */}
-      <section className="border-t hairline px-6 md:px-10 py-16 md:py-24">
-        <div className="mx-auto max-w-page">
+      <section className="border-t hairline px-[max(16px,3.5%)] py-16 md:py-24">
+        <div className="mx-auto w-full">
           <Link href={`/projects/${next.slug}`} className="group block">
             <p className="font-display font-medium text-xs uppercase tracking-[0.18em] text-chalk-300 mb-3">
               Следующий проект
@@ -142,7 +141,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </div>
       </section>
 
-      <Footer />
+      <Footer wide />
     </main>
   );
 }
@@ -160,7 +159,7 @@ function Meta({ label, children }: { label: string; children: React.ReactNode })
 
 function MetricCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="mx-auto w-full max-w-[480px] rounded-[28px] bg-[#202122] px-6 py-5 sm:px-7 sm:py-6">
+    <div className="w-full rounded-[28px] bg-[#202122] px-6 py-5 sm:px-7 sm:py-6">
       <p className="text-xl text-chalk-300">{label}</p>
       <p className={`mt-2 leading-tight tracking-tight text-chalk-50 ${value.length > 10 ? 'text-xl sm:text-2xl' : 'text-3xl sm:text-4xl'}`}>{value}</p>
     </div>
@@ -169,6 +168,40 @@ function MetricCard({ label, value }: { label: string; value: string }) {
 
 function SectionBlock({ section, index }: { section: ProjectSection; index: number }) {
   if (section.kind === 'gallery') {
+    if (section.rows && section.old) {
+      return (
+        <section className="grid items-start gap-6 md:grid-cols-2 lg:grid-cols-[0.85fr_1fr_1fr] lg:gap-8">
+          <div className="min-w-0 space-y-5 md:col-span-2 lg:col-span-1">
+            <h3 className="font-display text-xl md:text-2xl font-medium leading-tight tracking-tight">{section.title}</h3>
+            {section.metric && <MetricCard {...section.metric} />}
+            <dl className="max-w-prose space-y-4 leading-relaxed">
+              {section.description?.map(({ label, text }) => (
+                <div key={label}>
+                  <dt className="font-semibold text-white">{label}</dt>
+                  <dd className="text-chalk-300">{text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          {[
+            { label: 'После редизайна', screens: section.rows.flat() },
+            { label: 'До редизайна', screens: section.old },
+          ].map(({ label, screens }) => (
+            <div key={label} className="min-w-0">
+              <h4 className="mb-4 font-medium text-chalk-300">{label}</h4>
+              <div className={screens.length > 1 ? 'grid grid-cols-2 items-start gap-3' : 'max-w-xs'}>
+                {screens.map((src, i) => (
+                  <a key={src} href={withBase(src)} className="block overflow-hidden rounded-xl border hairline">
+                    <img src={withBase(src)} alt={[section.title, label, 'экран ' + (i + 1)].join(' — ')} loading="lazy" className="block h-auto w-full" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      );
+    }
+
     let body: React.ReactNode;
 
     // --- Rows-mode: explicit groupings, equal columns per row, natural aspect (no crop) ---
@@ -198,24 +231,6 @@ function SectionBlock({ section, index }: { section: ProjectSection; index: numb
         </div>
       );
 
-      // Old-version toggle: "before" screens, each sized like one column of the first row.
-      if (section.old) {
-        const cols = Math.max(section.rows[0].length, section.old.length);
-        const controlWrapClassName =
-          section.title === 'Главный экран' || section.title === 'Мои активности'
-            ? 'mx-auto max-w-2xl'
-            : undefined;
-        body = (
-          <CompareGallery
-            oldSrcs={section.old.map((s) => withBase(s))}
-            oldWrapClassName={`mx-auto ${rowMaxWidth(cols)}`}
-            controlWrapClassName={controlWrapClassName}
-            cols={cols}
-          >
-            {body}
-          </CompareGallery>
-        );
-      }
     } else if (section.layout === 'fit' && section.images) {
       // --- Fit-mode: stack at natural aspect, no crop. maxWidth optional (default 768) ---
       body = (
