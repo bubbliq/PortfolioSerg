@@ -59,8 +59,8 @@ export const projects: Project[] = [
     company: 'Кросслайф',
     platforms: ['iOS', 'Android', 'Web'],
     tools: ['Figma', 'JTBD', 'Юзабилити-тесты'],
-    cover: hf('main', 1),
-    cardImage: hf('main', 1),
+    cover: hf('main-redesign', 1),
+    cardImage: hf('main-redesign', 1),
     coverAspect: 'wide',
     sections: [
       {
